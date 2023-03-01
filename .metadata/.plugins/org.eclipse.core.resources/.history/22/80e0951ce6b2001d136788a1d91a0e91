@@ -1,0 +1,21 @@
+package com.anapurna.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+public class OrderItemService {
+	
+	@Service
+	public class OrderItemService {
+
+		@Autowired
+		private OrderItemDao orderItemDao;
+		
+		public List<OrderItem> findAllOrderItems() {
+			return orderItemDao.findAll();
+		}
+
+}
+}

@@ -1,0 +1,101 @@
+package com.anapurna.dtos;
+
+import org.springframework.beans.BeanUtils;
+
+import com.anapurna.entities.Customer;
+import com.anapurna.entities.DeliveryPerson;
+import com.anapurna.entities.FoodItem;
+import com.anapurna.entities.Restaurent;
+import com.anapurna.entities.RestaurentManager;
+import com.hungerbuzz.dtos.FoodTypeDto;
+
+
+public class DaoToEntityConverter {
+
+	
+	/*
+	 * This function returns the customer Dto.The copy properties will create the copy
+	 * of the cutomer to customerDto ignoring the password field.
+	 */
+	public static CustomerDto customerEntityToDto(Customer customer) {
+		
+		if(customer == null) {
+			return null;
+		}
+		
+		CustomerDto customerDto=new CustomerDto();
+		
+		BeanUtils.copyProperties(customer, customerDto, "password");
+		return customerDto;
+	}
+
+	
+	/*
+	 * This function returns the delivery Person dto by taking delivery person entity
+	 */
+	public static DeliveryPersonDto deliveryPersonEntityToDto(DeliveryPerson deliveryPerson) {
+		
+		if(deliveryPerson == null)
+			return null;
+		
+		DeliveryPersonDto deliveryPersonDto=new DeliveryPersonDto();
+		BeanUtils.copyProperties(deliveryPerson, deliveryPersonDto, "password");
+		return deliveryPersonDto;
+		
+	}
+	
+	
+	/*
+	 * This function returns the restaurant Manager  dto by taking manager entity
+	 */
+	public static RestaurentManagerDto RestaurentManagerEntityToDto(RestaurentManager restaurentManager) {
+		if(restaurentManager==null) {
+			return null;
+		}
+		
+	RestaurentManagerDto restaurentManagerDto=new RestaurentManagerDto();
+	BeanUtils.copyProperties(restaurentManager, restaurentManagerDto, "password");
+	return restaurentManagerDto;
+	}
+
+	
+	/*
+	 * This function does the same job of the above function using the direct dto function.
+	 */
+	public static RestaurentManagerDto RestaurentManagerToRestaurentManagerDto(RestaurentManager restaurantManager) {
+		
+		RestaurentManagerDto restaurantManagerDto = new RestaurentManagerDto();
+   		restaurantManagerDto.setId(restaurantManager.getId());
+   		restaurantManagerDto.setName(restaurantManager.getName());
+   		restaurantManagerDto.setEmail(restaurantManager.getEmail());
+   		restaurantManagerDto.setRestaurantId(restaurantManager.getRestaurentId().getId());
+   		restaurantManagerDto.setRestaurantName(restaurantManager.getRestaurentId().getName());
+   		return restaurantManagerDto;
+		
+	}
+
+	public static RestaurentHomePageDto restaurentEntityToRestaurentHomePageDto(Restaurent rest) {
+		RestaurentHomePageDto restHomePageDto=new RestaurentHomePageDto();
+		BeanUtils.copyProperties(rest, restHomePageDto, "restaurentmanager");
+		return restHomePageDto;
+	}
+
+	public static FoodTypeDto FoodTypeToFoodTypeDto(FoodTypeDto foodType) {
+		FoodTypeDto foodTypeDto = new FoodTypeDto();
+   		BeanUtils.copyProperties(foodType, foodTypeDto, "foodItems");
+   		return foodTypeDto;
+	}
+
+	public static FoodItemHomePageDto foodItemEntityToFoodItemHomePageDto(FoodItem foodItem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static FoodItemHomePageDto foodItemAddEntityToDto(FoodItem fooditem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

@@ -1,0 +1,37 @@
+package com.anapurna.dtos;
+
+import com.anapurna.entities.Customer;
+import com.anapurna.entities.DeliveryPerson;
+import com.anapurna.entities.Restaurent;
+import com.anapurna.entities.RestaurentManager;
+
+public class DaoToEntityConverter {
+
+	public static CustomerDto customerEntityToDto(Customer c) {
+		
+		return null;
+	}
+
+	public static DeliveryPersonDto deliveryPersonEntityToDto(DeliveryPerson person) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static RestaurentManagerDto RestaurentManagerEntityToDto(RestaurentManager r) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static RestaurentManagerDto RestaurentManagerToRestaurentManagerDto(RestaurentManager rest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static RestaurentHomePageDto restaurentEntityToRestaurentHomePageDto(Restaurent rest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

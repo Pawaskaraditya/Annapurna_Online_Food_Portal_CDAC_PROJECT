@@ -1,0 +1,79 @@
+package com.anapurna.services;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.anapurna.daos.CustomerDao;
+import com.anapurna.daos.DeliveryPersonDao;
+import com.anapurna.daos.FoodItemDao;
+import com.anapurna.daos.OrderItemDao;
+import com.anapurna.daos.OrdersDao;
+import com.anapurna.daos.PaymentDao;
+import com.anapurna.daos.RestaurentDao;
+import com.anapurna.dtos.OrdersDto;
+import com.anapurna.dtos.PlaceOrderDto;
+import com.anapurna.entities.Customer;
+import com.anapurna.entities.OrderItem;
+import com.anapurna.entities.Orders;
+import com.anapurna.entities.Restaurent;
+
+@Service
+@Transactional
+//Will take care fo all the order related stuff like placing order,payment
+//finding orders by restaurent id etc.
+public class OrdersService {
+	
+	@Autowired
+	private OrdersDao ordersDao;
+	
+	@Autowired
+	private RestaurentDao restaurentDao;
+	
+	@Autowired
+	private OrderItemDao orderItemDao;
+	
+	@Autowired
+	private FoodItemDao foodItemDao;
+	
+	@Autowired
+	private CustomerDao customerDao;
+	
+	@Autowired
+	private PaymentDao paymentDao;
+	
+	private DeliveryPersonDao deliveryPersonDao;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	
+	//Will return all orders
+	public List<Orders> findAllOrders(){
+		return ordersDao.findAll();
+	}
+	
+	
+	
+	public OrdersDto addOrder(PlaceOrderDto placeOrderDto) {
+		OrdersDto ordersDto=null;
+		
+		try {
+			Orders order=new Orders();
+			
+			Customer cust=customerDao.getById(placeOrderDto.getCustomerId());
+			
+			//Restaurent rest=restaurentDao.getByIdAat yetos nal)
+			
+			
+			
+			
+		}
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.anapurna.dtos;
+
+public class RestaurentManagerHomePageDto {
+
+}

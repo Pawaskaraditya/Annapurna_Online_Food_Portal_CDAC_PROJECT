@@ -1,0 +1,171 @@
+package com.anapurna.dtos;
+
+import org.springframework.beans.BeanUtils;
+
+import com.anapurna.entities.Customer;
+import com.anapurna.entities.DeliveryPerson;
+import com.anapurna.entities.FoodItem;
+import com.anapurna.entities.Orders;
+import com.anapurna.entities.Restaurent;
+import com.anapurna.entities.RestaurentManager;
+
+
+
+
+public class DaoToEntityConverter {
+
+	
+	/*
+	 * This function returns the customer Dto.The copy properties will create the copy
+	 * of the cutomer to customerDto ignoring the password field.
+	 */
+	public static CustomerDto customerEntityToDto(Customer customer) {
+		
+		if(customer == null) {
+			return null;
+		}
+		
+		CustomerDto customerDto=new CustomerDto();
+		
+		BeanUtils.copyProperties(customer, customerDto, "password");
+		return customerDto;
+	}
+
+	
+	/*
+	 * This function returns the delivery Person dto by taking delivery person entity
+	 */
+	public static DeliveryPersonDto deliveryPersonEntityToDto(DeliveryPerson deliveryPerson) {
+		
+		if(deliveryPerson == null)
+			return null;
+		
+		DeliveryPersonDto deliveryPersonDto=new DeliveryPersonDto();
+		BeanUtils.copyProperties(deliveryPerson, deliveryPersonDto, "password");
+		return deliveryPersonDto;
+		
+	}
+	
+	/*
+	 * Will use this for sign up of customer
+	 */
+	public static Customer customerSignUpDtoToCustomerEntity(CustomerSignUpDto customerSignUpDto) {
+		Customer cust = new Customer();
+		BeanUtils.copyProperties(customerSignUpDto, cust);
+		return cust;
+	}
+	
+	
+	public static RestaurentHomePageDto restaurantEntityToRestaurantHomePageDto(Restaurent rest) {
+		RestaurentHomePageDto restHomePageDto = new RestaurentHomePageDto();
+		BeanUtils.copyProperties(rest, restHomePageDto, "restaurantmanager", "foodItems", "orders");
+		return restHomePageDto;
+	}
+	
+	
+	/*
+	 * This function returns the restaurant Manager  dto by taking manager entity
+	 */
+	public static RestaurentManagerDto RestaurentManagerEntityToDto(RestaurentManager restaurentManager) {
+		if(restaurentManager==null) {
+			return null;
+		}
+		
+	RestaurentManagerDto restaurentManagerDto=new RestaurentManagerDto();
+	BeanUtils.copyProperties(restaurentManager, restaurentManagerDto, "password");
+	return restaurentManagerDto;
+	}
+
+	
+	/*
+	 * This function does the same job of the above function using the direct dto function.
+	 */
+	public static RestaurentManagerDto RestaurentManagerToRestaurentManagerDto(RestaurentManager restaurantManager) {
+		
+		RestaurentManagerDto restaurantManagerDto = new RestaurentManagerDto();
+   		restaurantManagerDto.setId(restaurantManager.getId());
+   		restaurantManagerDto.setName(restaurantManager.getName());
+   		restaurantManagerDto.setEmail(restaurantManager.getEmail());
+   		restaurantManagerDto.setRestaurantId(restaurantManager.getRestaurentId().getId());
+   		restaurantManagerDto.setRestaurantName(restaurantManager.getRestaurentId().getName());
+   		return restaurantManagerDto;
+		
+	}
+
+	public static RestaurentHomePageDto restaurentEntityToRestaurentHomePageDto(Restaurent rest) {
+		RestaurentHomePageDto restHomePageDto=new RestaurentHomePageDto();
+		BeanUtils.copyProperties(rest, restHomePageDto, "restaurentmanager");
+		return restHomePageDto;
+	}
+
+	public static FoodTypeDto FoodTypeToFoodTypeDto(FoodTypeDto foodType) {
+		FoodTypeDto foodTypeDto = new FoodTypeDto();
+   		BeanUtils.copyProperties(foodType, foodTypeDto, "foodItems");
+   		return foodTypeDto;
+	}
+
+	public static FoodItemHomePageDto foodItemEntityToFoodItemHomePageDto(FoodItem foodItem) {
+		FoodItemHomePageDto foodItemHomePageDto = new FoodItemHomePageDto();
+//		BeanUtils.copyProperties(foodItem, foodItemHomePageDto, "orderItem");
+		foodItemHomePageDto.setId(foodItem.getId());
+		foodItemHomePageDto.setFoodTypeId(foodItem.getFoodTypeId().getId());
+		foodItemHomePageDto.setRestaurantId(foodItem.getRestaurentId().getId());
+		foodItemHomePageDto.setName(foodItem.getName());
+		foodItemHomePageDto.setPrice(foodItem.getPrice());
+		foodItemHomePageDto.setVegetarian(foodItem.isVegetarian());
+		foodItemHomePageDto.setImagePath(foodItem.getImagePath());
+		return foodItemHomePageDto;
+	}
+
+	
+	/*
+	 * Does the same as above function.
+	 * returns the food item page dto by taking the food ietm details.
+	 */
+	public static FoodItemHomePageDto foodItemAddEntityToDto(FoodItem food) {
+		
+		
+		if(food==null) {
+			return null;
+		}
+		
+		FoodItemHomePageDto foodItemDto=new FoodItemHomePageDto();
+		foodItemDto.setId(food.getId());
+		
+		foodItemDto.setFoodTypeId(food.getFoodTypeId().getId());
+		foodItemDto.setRestaurantId(food.getRestaurentId().getId());
+		foodItemDto.setName(food.getName());
+		foodItemDto.setPrice(food.getPrice());
+		foodItemDto.setVegetarian(food.isVegetarian());
+		foodItemDto.setImagePath(food.getImagePath());
+		
+		return foodItemDto;
+		
+		
+	}
+	
+	
+	/*
+	 * This function will deliver the delivery person home page
+	 * That will include the orderid,restaurent details and customer details
+	 * 
+	 */
+	
+	public static DeliveryPersonHomePageDto toDeliveryPersonDTO(Orders entity) {
+		if(entity == null)
+			return null;
+		DeliveryPersonHomePageDto dto = new DeliveryPersonHomePageDto();
+		dto.setOrderId(entity.getId());
+		dto.setRestaurantName(entity.getRestaurentId().getName());
+		dto.setRestaurantAddress(entity.getRestaurentId().getAddress_text());
+		dto.setRestaurantPinCode(entity.getRestaurentId().getPinCode());
+		dto.setCustomerName(entity.getCustomerId().getName());
+		dto.setCustomerAddress(entity.getCustomerId().getAddressText());
+		dto.setCustomerPinCode(entity.getCustomerId().getPinCode());
+		
+		return dto;
+	}
+	
+	
+
+}

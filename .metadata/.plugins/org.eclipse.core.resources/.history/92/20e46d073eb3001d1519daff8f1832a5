@@ -1,0 +1,20 @@
+package com.anapurna.dtos;
+
+import com.anapurna.entities.Customer;
+import com.anapurna.entities.DeliveryPerson;
+
+public class DaoToEntityConverter {
+
+	public static CustomerDto customerEntityToDto(Customer c) {
+		
+		return null;
+	}
+
+	public static DeliveryPersonDto deliveryPersonEntityToDto(DeliveryPerson person) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}
